@@ -24,5 +24,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "spanish", name: "Spanish" }
 ];
 
-// export const OPENAI_KEY= "sk-iHvWt05jKrPgNOWNDp3G3tLDkwgAU_OEx3Rc1MNxbeT3BlbkFJwHKI8wQ1j-u8Pec6nQlpGteT5zZyDesxjL0RVg6ZEA"
+// export const OPENAI_KEY=process.env.REACT_APP_OPENAI_KEY
 
