@@ -117,7 +117,7 @@ const Login = () => {
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <p className="p-2 my-2 cursor-pointer" onClick={toggleSignInForm}>
+        <p className="p-2 my-2 cursor-pointer font-semibold" onClick={toggleSignInForm}>
           {isSignInForm
             ? "New to Netflix? Sign Up Now"
             : "Already registered. Sign In now.."}
