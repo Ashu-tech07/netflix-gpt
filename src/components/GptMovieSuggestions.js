@@ -9,7 +9,7 @@ const GptMovieSuggestions = () => {
    if(movieResults.length===0){
     return (
       <div className="p-4 m-4 bg-black text-white bg-opacity-80">
-      <h1 className="font-bold text-3xl">Movies not found...!! Search another movie.</h1>
+      <h1 className="font-bold text-lg md:text-3xl">Movies not found...!! Search another movie.</h1>
     </div>
     )
    }
