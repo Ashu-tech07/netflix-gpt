@@ -11,7 +11,7 @@ const Body = () => {
 
   const appRouter = createBrowserRouter([
     {
-      path: "/",
+      path: "/netflix-gpt",
       element: <Login />,
     },
     {
