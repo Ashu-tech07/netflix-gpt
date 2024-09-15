@@ -1,3 +1,4 @@
 - Made a website like Netflix using TMDB APIs.
 - Implemented ChatGPT search option using OpenAI APIs.
 - Used Redux Toolkit for state management.
+- Used Firebase for authentication.
