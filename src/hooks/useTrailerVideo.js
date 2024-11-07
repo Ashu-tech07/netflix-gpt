@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from "react-redux";
+
 import { API_OPTIONS } from "../utils/constants";
-import { addTrailerVideo } from "../utils/movieSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useTrailerVideo=(moviesId)=>{
-    const dispatch=useDispatch();
-    const trailerVideo= useSelector(store=> store.movies.trailerVideo)
+    const [videoUrl,setVideoUrl]=useState(null);
+
     const getMovieVideos = async () => {
         const data = await fetch(
           "https://api.themoviedb.org/3/movie/"+moviesId+"/videos?language=en-US",
@@ -13,18 +12,26 @@ const useTrailerVideo=(moviesId)=>{
         );
         const json = await data.json();
        
-        const filterTrailer = json.results.filter(
-          (video) => video.type === "Trailer"
+        const filterData = json?.results?.filter(
+          (video) => video?.type === "Trailer"
         );
-        const trailerDetails = filterTrailer.length ? filterTrailer[0] : json.results[0];
 
-        dispatch(addTrailerVideo(trailerDetails));
+        if (filterData[0]?.key){
+          setVideoUrl(
+            "https://www.youtube.com/embed/" +
+              filterData[0]?.key +
+              "?playlist=" +
+              filterData[0]?.key +
+              "&rel=0&loop=1&autoplay=1&mute=1"
+          );
+        }
       };
     
       useEffect(() => {
-      !trailerVideo &&  getMovieVideos();
+       getMovieVideos();
       }, []);
     
+      return videoUrl;
 }
 
 export default useTrailerVideo;

@@ -1,15 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addTrailerId } from '../redux/gptSlice';
 
-const VideoTitle = ({title, overview}) => {
+const VideoTitle = ({title, overview, id }) => {
+  const [showOverview, setShowOverview] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  if (overview.length > 300) {
+    overview = overview.substring(0, 300) + ".";
+  }
+
+  const handleShow = () => {
+    setShowOverview(!showOverview);
+  };
+
+  const handleRedirectToWatch = () => {
+    dispatch(addTrailerId(id));
+    navigate("/watch");
+  };
+
   return (
-    <div className='w-full aspect-video px-6 md:px-24 pt-36 absolute pt-[20%] bg-gradient-to-r from-black text-white'>
-      <h1 className='font-bold text-xl md:text-4xl'>{title}</h1>
-      <p className='hidden md:inline-block py-6 text-lg w-1/2'>{overview}</p>
-      <div>
-        <button className='bg-gray-600 bg-white text-black text-xl py-1 md:py-4 px-3 md:px-12  rounded-lg mx-2 my-2 md:m-0 hover:bg-opacity-80'> ▶ Play</button>
-        <button className='hidden md:inline-block bg-gray-600 text-xl  p-4 px-12 rounded-lg mx-2'>More Info</button>
-      </div>
+    <div className="w-screen md:aspect-video aspect-square pt-[25%] md:pt-[15%] md:px-12 px-5 absolute bg-gradient-to-r from-black text-white">
+    <h1 className="font-bold text-xl  pt-10 md:pt-0 md:text-3xl">{title}</h1>
+    {showOverview && (
+      <h1 className="w-[25%] md:inline-block hidden py-5">{overview}</h1>
+    )}
+
+    <div className="md:mt-2">
+      <button
+        onClick={handleRedirectToWatch}
+        className=" bg-white  hover:bg-opacity-75 font-bold rounded-sm text-black px-1 py-2 md:px-4 md:py-2 md:mt-0 mt-2  md:mr-2"
+      >
+        ▶️ Play
+      </button>
+      <button
+        onClick={handleShow}
+        className="bg-gray-700 bg-opacity-70 md:inline-block hidden rounded-sm font-semibold text-white py-2 md:px-4 md:py-2 px-1"
+      >
+        {showOverview ? "Hide info" : " ℹ️ More info"}
+      </button>
     </div>
+  </div>
   )
 }
 

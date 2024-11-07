@@ -1,12 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import MovieList from "./MovieList";
+import GptMovieList from "./GptMovieList";
 
 
 const GptMovieSuggestions = () => {
-  const { movieNames, movieResults } = useSelector((state) => state.gpt);
+  const { movieNames, movies} = useSelector((state) => state.suggestions);
+
   if (!movieNames) return null;
-   if(movieResults.length===0){
+
+   if(movies.length===0){
     return (
       <div className="p-4 m-4 bg-black text-white bg-opacity-80">
       <h1 className="font-bold text-lg md:text-3xl">Movies not found...!! Search another movie.</h1>
@@ -15,17 +17,8 @@ const GptMovieSuggestions = () => {
    }
    
   return (
-    <div className="p-4 m-4 bg-black text-white bg-opacity-80">
-      <div>
-        {/* <<<<<--- OpenAI movies rendering------>>>>>>>> */}
-        {/* {
-        movieNames.map((movieName, index)=>
-        <MovieList key={movieName} title={movieName} movies={movieResults[index]} />)
-        } */}
-        {/* <<<<<<<<<<<<<<----END---->>>>>>>>>>>>>>>>>>> */}
-        <h1 className="text-xl">Result for {movieNames}...</h1>
-        <MovieList key={movieNames} title={movieNames} movies={movieResults}/>
-      </div>
+    <div className="">
+      <GptMovieList movies={movies} title={"Top 10 movies"} />
     </div>
   );
 };
